@@ -659,6 +659,7 @@ namespace Kalman {
     K_UINT_32 nw;       //!< Size of the process noise vector.
     K_UINT_32  m;       //!< Size of the measurement vector.
     K_UINT_32 nv;       //!< Size of the measurement noise vector.
+    K_UINT_16 flags;    //!< Bitfield keeping track of modified matrices.
 
     //@}
 
@@ -805,7 +806,6 @@ namespace Kalman {
     mutable Matrix _P;  //!< Temporary matrix.
     mutable Vector _x;  //!  Temporary vector.
 
-    K_UINT_16 flags;    //!< Bitfield keeping track of modified matrices.
     bool modified_;     //!< Boolean flag used by \c NoModification().
 
   };

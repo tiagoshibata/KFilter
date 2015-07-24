@@ -95,7 +95,7 @@ namespace Kalman {
     virtual void makeB();
     
     //! Input matrix.
-    Matrix B;
+    typename EKFilter<T, BEG, OQ, OVR, DBG>::Matrix B;
 
   private:
 
@@ -109,7 +109,7 @@ namespace Kalman {
     virtual void sizeUpdate();
 
     //! Temporary vector.
-    Vector x__;
+    typename EKFilter<T, BEG, OQ, OVR, DBG>::Vector x__;
   };
 
 }

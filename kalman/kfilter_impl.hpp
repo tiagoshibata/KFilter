@@ -48,21 +48,21 @@ namespace Kalman {
     makeB();
 
     K_UINT_32 i, j;
-    x__.resize(n);
+    x__.resize(this->n);
 
-    for (i = BEG; i < n + BEG; ++i) {
+    for (i = BEG; i < this->n + BEG; ++i) {
 
       x__(i) = T(0.0);
 
-      for (j = BEG; j < n + BEG; ++j)
-        x__(i) += A(i,j) * x(j);
+      for (j = BEG; j < this->n + BEG; ++j)
+        x__(i) += this->A(i,j) * this->x(j);
 
-      for (j = BEG; j < nu + BEG; ++j)
-        x__(i) += B(i,j) * u(j);
+      for (j = BEG; j < this->nu + BEG; ++j)
+        x__(i) += B(i,j) * this->u(j);
 
     }
 
-    x.swap(x__);
+    this->x.swap(x__);
 
   }
 
@@ -72,13 +72,13 @@ namespace Kalman {
     // z = Hx + Vv
     K_UINT_32 i, j;
 
-    z.resize(m);
-    for (i = BEG; i < m + BEG; ++i) {
+    this->z.resize(this->m);
+    for (i = BEG; i < this->m + BEG; ++i) {
 
-      z(i) = T(0.0);
+      this->z(i) = T(0.0);
 
-      for (j = BEG; j < n + BEG; ++j)
-        z(i) += H(i,j) * x(j);
+      for (j = BEG; j < this->n + BEG; ++j)
+        this->z(i) += this->H(i,j) * this->x(j);
 
     }
 
@@ -87,8 +87,8 @@ namespace Kalman {
   template<typename T, K_UINT_32 BEG, bool OQ, bool OVR, bool DBG>
   void KFilter<T, BEG, OQ, OVR, DBG>::sizeUpdate() {
 
-    if (flags & ( KALMAN_N_MODIFIED | KALMAN_NU_MODIFIED ) ) {
-      B.resize(n, nu);
+    if (this->flags & ( KALMAN_N_MODIFIED | KALMAN_NU_MODIFIED ) ) {
+      B.resize(this->n, this->nu);
       makeBaseB();
     }   
     
